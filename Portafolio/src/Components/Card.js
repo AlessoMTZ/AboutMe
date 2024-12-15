@@ -17,8 +17,8 @@ const CardContainer = styled(motion.div)`
 `;
 
 const Image = styled.img`
-    width: 80px;
-    height: 80px;
+    width: 300px;
+    height: 400px;
     object-fit: 50%;
     border-radius: 1rem;
 `;
