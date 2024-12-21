@@ -1,57 +1,63 @@
-import React from "react";
-import styled from "styled-components";
-import { motion } from "framer-motion";
+import React from 'react';
+import styled from 'styled-components';
 
-const CardContainer = styled(motion.div)`
-    background-color: #fff;
-    padding: 2rem;
-    margin: 1rem;
+const CardContainer = styled.div`
+    width: 300px;
+    padding: 1.5rem;
+    background-color: #1a1a1a;
+    border: 2px solid #acc53d;
     border-radius: 10px;
-    box-shadow: 0 4 6px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
     text-align: center;
-    max-width: 300px;
-    transition: transform 0.2s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+`;
+
+const CardTitle = styled.h3`
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #acc53d;
+`;
+
+const IconGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    gap: 1.5rem;
+    justify-items: center;
+`;
+
+const IconWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2.5rem;
+    color: #fff;
+    text-align: center;
+
     &:hover {
-        transform: translateY(-10px);
+        color: #acc53d; /* Cambia el color al pasar el mouse */
     }
 `;
 
-const Image = styled.img`
-    width: 300px;
-    height: 400px;
-    object-fit: 50%;
-    border-radius: 1rem;
-`;
-
-const Name = styled.h2`
-    margin: 1rem 0;
-    color: #333;
-`;
-
-const Description = styled.p`
-    color: #555;
+const IconLabel = styled.span`
+    margin-top: 0.5rem;
     font-size: 1rem;
+    font-weight: bold;
+    color: #ddd;
 `;
 
-const Skills = styled.div`
-    margin-top: 1rem;
-    font-size: 0.9rem;
-`;
+const SkillCard = ({ title, icons }) => (
+    <CardContainer>
+        <CardTitle>{title}</CardTitle>
+        <IconGrid>
+            {icons.map(({ icon: Icon, label }, index) => (
+                <IconWrapper key={index}>
+                    <Icon />
+                    <IconLabel>{label}</IconLabel>
+                </IconWrapper>
+            ))}
+        </IconGrid>
+    </CardContainer>
+);
 
-const Card = ({ image, name, description, skills = [] }) => {
-    return (
-        <CardContainer
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-        >
-            {image && <Image src={image} alt={name} />}
-            <Name>{name}</Name>
-            <Description>{description}</Description>
-            <Skills>
-                <strong>Skills:</strong> {skills.length > 0 ? skills.join(', ') : 'No skills available'}
-            </Skills>
-        </CardContainer>
-    );
-};
-
-export default Card;
+export default SkillCard;

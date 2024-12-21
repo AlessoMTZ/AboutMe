@@ -1,54 +1,90 @@
 import React, { useEffect, useRef } from 'react';
 import Typed from 'typed.js';
 import styled from 'styled-components';
+import { FaReact, FaHtml5, FaCss3Alt, FaNodeJs, FaPython, FaDatabase, FaJava, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { SiJavascript, SiPostgresql, SiMongodb } from 'react-icons/si';
 import image1 from '../Images/image1.jpg';
-import bannerImage from '../Images/banner.jpg';
+import SkillCard from '../Components/Card'; // Componente de tarjeta
+
+
+const PageContainer = styled.div`
+    min-height: 100vh;
+    background-color: rgb(0, 0, 0); /* Fondo negro */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+`;
 
 const BannerContainer = styled.div`
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
-    gap: 2rem;
-    padding: 2rem;
-    background-image: url(${bannerImage});
-    background-size: cover;
-    background-position: center; 
-    height: 300px;
-    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 3rem;
 `;
 
-const TextContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    position: relative; /* Habilita el control independiente */
-    top: 100px; /* Ajusta esta propiedad para mover verticalmente */
-    left: 70px; /* Ajusta esta propiedad para mover horizontalmente */
+const TextSection = styled.div`
+    text-align: left;
 `;
 
 const Name = styled.h1`
-    font-size: 2.5rem;
+    font-size: 4rem;
     margin: 0;
-    color:rgb(0, 212, 240);
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+    color: #999;
 `;
 
 const Description = styled.p`
-    font-size: 1.2rem;
+    font-size: 2rem;
     margin: 0.5rem 0 0;
-    color:rgb(236, 236, 236);
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+    color: #acc53d;
+`;
+
+const IconButtonContainer = styled.div`
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+`;
+
+const IconButton = styled.a`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #1a1a1a;
+    color: #acc53d;
+    font-size: 1.5rem;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+        background-color: #acc53d;
+        color: #1a1a1a;
+        transform: scale(1.1);
+    }
 `;
 
 const Image = styled.img`
-    width: 230px;
-    height: 230px;
+    width: 300px;
+    height: 300px;
     object-fit: cover;
     border-radius: 50%;
-    position: relative; /* Habilita el control independiente */
-    top: 30px; /* Ajusta esta propiedad para mover verticalmente */
-    right: 100px; /* Ajusta esta propiedad para mover horizontalmente */
+    border: 2px solid #ddd;
+`;
+
+const CardGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 1rem;
+    margin-top: 30rem;
+
 `;
 
 const Home = () => {
@@ -57,21 +93,20 @@ const Home = () => {
 
     useEffect(() => {
         const typedName = new Typed(nameEl.current, {
-            strings: ['Gastón Metzger'], // Texto que se escribe
+            strings: ['Gastón Metzger'], 
             typeSpeed: 50,
             backSpeed: 30,
             showCursor: false,
         });
 
         const typedDescription = new Typed(descriptionEl.current, {
-            strings: ['FULLSTACK DEVELOPER'], // Texto que se escribe
+            strings: ['FULLSTACK DEVELOPER'], 
             typeSpeed: 50,
             backSpeed: 30,
             startDelay: 1000,
             showCursor: false,
         });
 
-        // Limpieza
         return () => {
             typedName.destroy();
             typedDescription.destroy();
@@ -79,13 +114,64 @@ const Home = () => {
     }, []);
 
     return (
-        <BannerContainer>
-            <TextContainer>
-                <Name ref={nameEl}></Name>
-                <Description ref={descriptionEl}></Description>
-            </TextContainer>
-            <Image src={image1} alt="Gastón Metzger" />
-        </BannerContainer>
+        <PageContainer>
+            {/* Sección del Encabezado */}
+            <BannerContainer>
+                <TextSection>
+                    <Name ref={nameEl}></Name>
+                    <Description ref={descriptionEl}></Description>
+                    {/* Botones de LinkedIn y GitHub */}
+                    <IconButtonContainer>
+                        <IconButton
+                            href="https://www.linkedin.com/in/gast%C3%B3n-alessandro-metzger-arce-a8113b15b/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="LinkedIn"
+                        >
+                            <FaLinkedin />
+                        </IconButton>
+                        <IconButton
+                            href="https://github.com/AlessoMTZ/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="GitHub"
+                        >
+                            <FaGithub />
+                        </IconButton>
+                    </IconButtonContainer>
+                </TextSection>
+                <Image src={image1} alt="Gastón Metzger" />
+            </BannerContainer>
+
+            {/* Sección de Tarjetas */}
+            <CardGrid>
+                <SkillCard
+                    title="Frontend"
+                    icons={[
+                        { icon: FaReact, label: 'React' },
+                        { icon: FaHtml5, label: 'HTML5' },
+                        { icon: FaCss3Alt, label: 'CSS3' },
+                        { icon: SiJavascript, label: 'JavaScript' },
+                    ]}
+                />
+                <SkillCard
+                    title="Backend"
+                    icons={[
+                        { icon: FaNodeJs, label: 'Node.js' },
+                        { icon: FaPython, label: 'Python' },
+                        { icon: FaJava, label: 'Java' },
+                    ]}
+                />
+                <SkillCard
+                    title="Bases de Datos"
+                    icons={[
+                        { icon: SiPostgresql, label: 'PostgreSQL' },
+                        { icon: SiMongodb, label: 'MongoDB' },
+                        { icon: FaDatabase, label: 'SQL' },
+                    ]}
+                />
+            </CardGrid>
+        </PageContainer>
     );
 };
 

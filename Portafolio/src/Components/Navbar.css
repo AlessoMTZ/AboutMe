@@ -14,7 +14,7 @@
   .logo a {
     font-size: 1.8rem;
     font-weight: bold;
-    color: #00bcd4;
+    color: #acc53d;
     text-decoration: none;
     transition: color 0.3s ease;
   }
@@ -49,7 +49,7 @@
   
   /* Hover Effects for Links */
   .nav-links a:hover {
-    background-color: #00bcd4;
+    background-color: #acc53d;
     color: #1f1f1f;
   }
   
