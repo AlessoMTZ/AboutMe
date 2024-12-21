@@ -38,16 +38,18 @@ const Skills = styled.div`
     font-size: 0.9rem;
 `;
 
-const Card = ({ image, name, description, skills }) => {
+const Card = ({ image, name, description, skills = [] }) => {
     return (
         <CardContainer
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
         >
-           {image && <Image src={image} alt={name} />}
+            {image && <Image src={image} alt={name} />}
             <Name>{name}</Name>
             <Description>{description}</Description>
-            <Skills><strong>Skills:</strong> {skills.join(', ')}</Skills>
+            <Skills>
+                <strong>Skills:</strong> {skills.length > 0 ? skills.join(', ') : 'No skills available'}
+            </Skills>
         </CardContainer>
     );
 };
