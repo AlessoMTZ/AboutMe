@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import { FaReact, FaHtml5, FaCss3Alt, FaNodeJs, FaPython, FaDatabase, FaJava, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { SiJavascript, SiPostgresql, SiMongodb } from 'react-icons/si';
 import image1 from '../Images/image1.jpg';
-import SkillCard from '../Components/Card'; // Componente de tarjeta
+import SkillCard from '../Components/Card';
+import 'typeface-fira-code';
+
 
 
 const PageContainer = styled.div`
@@ -14,6 +16,7 @@ const PageContainer = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 2rem;
+    font-family: 'Fira Code', monospace;
 `;
 
 const BannerContainer = styled.div`
@@ -33,12 +36,14 @@ const Name = styled.h1`
     font-size: 4rem;
     margin: 0;
     color: #999;
+    font-family: 'Fira Code', monospace;
 `;
 
 const Description = styled.p`
     font-size: 2rem;
     margin: 0.5rem 0 0;
     color: #acc53d;
+    font-family: 'Fira Code', monospace;
 `;
 
 const IconButtonContainer = styled.div`
@@ -58,6 +63,7 @@ const IconButton = styled.a`
     color: #acc53d;
     font-size: 1.5rem;
     text-decoration: none;
+    font-family: 'Fira Code', monospace;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
     transition: background-color 0.3s ease, transform 0.3s ease;
 
@@ -163,7 +169,7 @@ const Home = () => {
                     ]}
                 />
                 <SkillCard
-                    title="Bases de Datos"
+                    title="Database"
                     icons={[
                         { icon: SiPostgresql, label: 'PostgreSQL' },
                         { icon: SiMongodb, label: 'MongoDB' },
