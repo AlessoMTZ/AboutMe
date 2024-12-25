@@ -35,7 +35,7 @@ app.post('/send-email', async (req, res) => {
         from: email,
         to: process.env.GMAIL_RECIPIENT, // Usa la variable de entorno para el destinatario
         subject: `Nuevo mensaje de ${name}`,
-        text: `Correo: ${email}\n\nMensaje:\n${message}`,
+        text: `${email}\n\n${message}`,
     };
 
     try {

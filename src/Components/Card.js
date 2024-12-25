@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-const CardContainer = styled.div`
+const CardContainer = styled(motion.div)`
     width: 300px;
     padding: 1.5rem;
     background-color: #1a1a1a;
@@ -47,7 +48,12 @@ const IconLabel = styled.span`
 `;
 
 const SkillCard = ({ title, icons }) => (
-    <CardContainer>
+    <CardContainer
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.5 }}
+        whileHover={{ scale: 1.05 }}
+    >
         <CardTitle>{title}</CardTitle>
         <IconGrid>
             {icons.map(({ icon: Icon, label }, index) => (
