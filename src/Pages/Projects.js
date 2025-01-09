@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FaGithub } from 'react-icons/fa';
 import Typed from 'typed.js';
 import 'typeface-fira-code';
-import project1Image from '../Images/project1.jpg';
+import project1Image from '../Images/project1.webp';
 
 const PageContainer = styled.div`
     min-height: 100vh;
@@ -19,7 +19,7 @@ const PageContainer = styled.div`
 const Title = styled.h1`
     font-size: 3rem;
     margin-bottom: 2rem;
-    color: #999;
+    color:rgb(185, 185, 185);
     font-family: 'Fira Code', monospace;
 `;
 

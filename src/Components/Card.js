@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -47,23 +47,43 @@ const IconLabel = styled.span`
     color: #ddd;
 `;
 
-const SkillCard = ({ title, icons }) => (
-    <CardContainer
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.5 }}
-        whileHover={{ scale: 1.05 }}
-    >
-        <CardTitle>{title}</CardTitle>
-        <IconGrid>
-            {icons.map(({ icon: Icon, label }, index) => (
-                <IconWrapper key={index}>
-                    <Icon />
-                    <IconLabel>{label}</IconLabel>
-                </IconWrapper>
-            ))}
-        </IconGrid>
-    </CardContainer>
-);
+const SkillCard = ({ title, icons }) => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    const onScroll = (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+            setIsVisible(true);
+        }
+    };
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(onScroll, { threshold: 0.5 }); // 50% visible
+        const element = document.getElementById(title);
+        if (element) observer.observe(element);
+
+        return () => observer.disconnect();
+    }, [title]);
+
+    return (
+        <CardContainer
+            id={title}
+            initial={{ opacity: 0, y: 40 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}} // Animar solo cuando es visible
+            transition={{ duration: 0.8 }}
+            whileHover={{ scale: 1.05 }}
+        >
+            <CardTitle>{title}</CardTitle>
+            <IconGrid>
+                {icons.map(({ icon: Icon, label }, index) => (
+                    <IconWrapper key={index}>
+                        <Icon />
+                        <IconLabel>{label}</IconLabel>
+                    </IconWrapper>
+                ))}
+            </IconGrid>
+        </CardContainer>
+    );
+};
 
 export default SkillCard;
